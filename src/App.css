@@ -1,0 +1,23 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  --color-one:rgb(177, 228, 243);
+}
+
+
+
+.Conten{
+  background-color: var(--color-one);
+  border-radius: 20px;
+  max-width: 100%;
+}
+
+.ContenPregunta{
+  max-width: 70%;
+  border: 1px solid rgb(22, 147, 181);
+  text-align: start;
+  text-align: justify;
+  padding: 5px 10px;
+}
