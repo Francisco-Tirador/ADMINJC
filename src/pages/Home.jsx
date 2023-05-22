@@ -7,14 +7,15 @@ import { useForm } from 'react-hook-form'
 const Home = () => {
 
 const [ComentariosDB,setComentariosDB]=useState("")
-let NumIdSesion="0"
+const [NumSesion,setNumSesion]=useState("")
+
 
 const  GetAllpreguntas= ()=>{
-    let url= `https://jc-innovation.com/ad/ModelApi.php?GetById=${NumIdSesion}`
+    let url= `https://jc-innovation.com/ad/ModelApi.php?GetById=${NumSesion}`
      axios.get(url)
      .then(api=>{
-      console.log(api?.data?.Comentarios),
-      setComentariosDB( api?.data?.Comentarios)
+      console.log(api),
+      setComentariosDB(api.data.Comentarios),
       console.log(ComentariosDB)
     }
         )
@@ -22,41 +23,53 @@ const  GetAllpreguntas= ()=>{
       setComentariosDB(404)}
     )
   }
-  // GetAllpreguntas()
+
   useEffect(() => {
-    // GetAllpreguntas()
-    // console.log("Yo estoy en el efect",ComentariosDB)
-  }, [])
+    GetAllpreguntas()
+  }, [NumSesion])
 
   const {handleSubmit,register}=useForm()  
 
-  const submit=data=>{
+  const  submit= data=>{
       console.log(data)
-      NumIdSesion=data?.IDsesion
-      GetAllpreguntas()
-   
+      setNumSesion(data?.IDsesion)
+      console.log(NumSesion)
+  }
+
+
+  const removeComentario=(ad)=>{
+    console.log("hola me removere"+ad)
   }
 
   return (
     <div >
       <form onSubmit={handleSubmit(submit)}>
             <label htmlFor="name"></label>
-            <input  placeholder="Enter your name" type="text" id='name' required  autoComplete='off'{...register("IDsesion")}/>
-            <button onClick={submit}>BUSCAR PREGUNTAS</button>
+            <input  placeholder="Ingresa ID de la sesion" type="text" id='name' required  autoComplete='off'{...register("IDsesion")}/>
+            <button >BUSCAR PREGUNTAS</button>
         </form>
-      <h3>PREGUNTAS DE AMCE MODULO {NumIdSesion}</h3>
+      <h3>PREGUNTAS DE AMCE MODULO {NumSesion}</h3>
    <div className='Conten'>
+   <tr>
    {
           ComentariosDB?.[0]?
             ComentariosDB.map(Comentario=>(
-                <Pregunta
-                id={Comentario?.id}
+               
+                 <Pregunta
+                ID={Comentario?.id}
                 message={Comentario.comentario}
+                autor={Comentario.nombre}
                 key={Comentario?.id}
+                remove={removeComentario}
+                refresh={GetAllpreguntas}
                 />
-            )):ComentariosDB==undefined?<div className='contenidoInicio'><h2>NO EXISTE ESTE ID O INTENTA DE NUEVO</h2></div>:
+              
+              
+            )):ComentariosDB?.length==0?<div className='contenidoInicio'><h2>NO EXISTE ESTE ID O INTENTA DE NUEVO</h2></div>:
             <div className='contenidoInicio'><h2>INGRESA UNA ID DE SESION PARA VISUALIZAR LAS PREGUNTAS</h2></div>
 }
+
+</tr>
 
    </div>
     </div>

@@ -21,3 +21,6 @@
   text-align: justify;
   padding: 5px 10px;
 }
+.warning{
+  background-color: rgb(248, 78, 26);
+}
