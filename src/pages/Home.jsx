@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Pregunta from '../Componts/Pregunta'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
+import ServidoresHeader from '../Componts/ServidoresHeader'
+import Menu from '../Componts/Menu'
 
 
 const Home = () => {
@@ -23,7 +25,6 @@ const [ComentariosDB,setComentariosDB]=useState("")//!Aqui se almacena la inform
 const [NumSesion,setNumSesion]=useState("")//! aqui se almacena el numero de la sesión
 const [User,setUser]=useState(0)//! aqui se almacena el numero de la sesión
 
-// const asd=
 
 //!aqui se manda a llamar la api
 const  GetAllpreguntas= ()=>{
@@ -44,57 +45,44 @@ const  GetAllpreguntas= ()=>{
     GetAllpreguntas()
   }, [NumSesion])
 
-// const bucle=()=>{
-//   GetAllpreguntas()
-// }
-
-
   const {handleSubmit,register}=useForm()  
-
 
   //!aqui creamos se guarda la informacion del form
   const  submit= data=>{
       console.log(data)
       setNumSesion(data?.IDsesion)
-        //  GetAllpreguntas()
       console.log(NumSesion)
   }
 
 
-  const INDEX=[]
-  const RetornarIndex=apis.map(tar=>{INDEX.push(tar.name)})
-  
+ 
 
-  const valueUsuario=(valu)=>{
-    let valor=valu.target.value
-   let art= INDEX.indexOf(valor)
-     setUser(art)
-    console.log(valu)
-  }
-
-
-
-
-// console.log(INDEX)
 
   return (
-    <div >
-      <select name="Amce" id="Acme" onChange={valueUsuario}>
-     {
-      INDEX.map(Option=>(
-        <option key={Option} value={Option}>{Option}</option>
-      ))
-     }
-      </select>
+    <div className='Home'>
+      <Menu color={apis[User].name}/>
+      <ServidoresHeader apis={apis} setUser={setUser} User={User} modulo={NumSesion}/>
+      
 
       <form onSubmit={handleSubmit(submit)}>
             <label htmlFor="name"></label>
             <input  placeholder="Ingresa ID de la sesion" type="text" id='name' required  autoComplete='off'{...register("IDsesion")}/>
             <button >BUSCAR PREGUNTAS</button>
         </form>
-      <h3>PREGUNTAS DE {apis[User].name} MODULO   { NumSesion}</h3>
-   <div className='Conten'>
+      {/* <h3>PREGUNTAS DE {apis[User].name} MODULO   { NumSesion}</h3> */}
+   <div className='ContenP'>
 
+    {
+          ComentariosDB?.[0]?<tr className="PrincipalTR">
+          <th className='ContenPregunta'>COMENTARIO</th>
+            <th className='ContenPregunta'>USUARIO</th>
+         
+          
+         
+          </tr>:""
+           
+          
+    }
    {
           ComentariosDB?.[0]?
             ComentariosDB.map(Comentario=>(

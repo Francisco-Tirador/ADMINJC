@@ -27,7 +27,7 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
+  /* min-width: 320px; */
   min-height: 100vh;
 }
 
@@ -66,4 +66,34 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+
+.ContenHomeHeader{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  color: #ffffff;
+  border-radius: 0 0 20px 20px;
+  width:100%;
+}
+.SOCMECIRPED{
+  background-color: rgb(255, 175, 28);
+  /* color: purple; */
+}
+.Ammr{
+  background-color: rgb(223, 208, 1);
+}
+.AMMTAC{
+  background-color: rgb(186, 2, 2);
+}
+.Comexane{
+  background-color: #373fcd;
+}
+.Ameh{
+  background-color: #373fcd;
+  /* color: rgb(212, 34, 34); */
+}
+.Amce{
+  background-color: #71bc01;
 }
