@@ -44,6 +44,9 @@ const  GetAllpreguntas= ()=>{
   useEffect(() => {
     GetAllpreguntas()
   }, [NumSesion])
+  useEffect(() => {
+    GetAllpreguntas()
+  }, [ComentariosDB])
 
   const {handleSubmit,register}=useForm()  
 
@@ -69,6 +72,10 @@ const  GetAllpreguntas= ()=>{
             <input  placeholder="Ingresa ID de la sesion" type="text" id='name' required  autoComplete='off'{...register("IDsesion")}/>
             <button >BUSCAR PREGUNTAS</button>
         </form>
+        <iframe src="https://piensaendigital.es/"></iframe>
+        <iframe src="https://music.youtube.com/watch?v=NorfZaIkyL8&list=RDAMVMDFhLjVAGNbA"></iframe>
+        <iframe src="https://vimeo.com/829649231" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+{/* <p><a href="https://vimeo.com/829649231">ciru pe 23 mayo</a> from <a href="https://vimeo.com/user200893153">Omar</a> on <a href="https://vimeo.com">Vimeo</a>.</p> */}
       {/* <h3>PREGUNTAS DE {apis[User].name} MODULO   { NumSesion}</h3> */}
    <div className='ContenP'>
 
