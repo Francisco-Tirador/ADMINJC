@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import ServidoresHeader from '../Componts/ServidoresHeader'
 import Menu from '../Componts/Menu'
-// import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import Asistente from '../Componts/Asistente'
 import Pais from '../Componts/Pais'
 const Home = () => {
@@ -22,11 +22,16 @@ const apis=[
 //!
 
 
-const [ComentariosDB,setComentariosDB]=useState("")//!Aqui se almacena la informacion
+const [ComentariosDB,setComentariosDB]=useState(false)//!Aqui se almacena la informacion
 const [NumSesion,setNumSesion]=useState("")//! aqui se almacena el numero de la sesión
 const [User,setUser]=useState(0)//! aqui se almacena el numero de la sesión
 const [Asistentes,setAsistentes]=useState("")
 const [Paises,setPaises]=useState("")
+const [Refresh,setRefresh]=useState(false)
+
+
+
+
 
 
 //!aqui se manda a llamar la api
@@ -35,59 +40,90 @@ const  GetAllpreguntas= ()=>{
      axios.get(url)
      .then(api=>{
       setComentariosDB(api.data.Comentarios)
+      
     }
         )
     .catch(err=>{}
     )
 
     let asistentes=`https://jc-innovation.com/ad/${apis[User].name}/ModelApi.php?asistentes=`
- axios.get(asistentes+NumSesion)
-     .then(api=>{
-      setAsistentes(api.data.Asistentes)
-    }
-        )
-    .catch(err=>{}
-    )
-    let Paises=`https://jc-innovation.com/ad/${apis[User].name}/ModelApi.php?Paises=${NumSesion}`
- axios.get(Paises)
-     .then(api=>{
-      setPaises(api.data.Paises)
-      // console.log(api.data.Paises)
-    }
-        )
-    .catch(err=>{}
-    )
+    axios.get(asistentes+NumSesion)
+        .then(api=>{
+         setAsistentes(api.data.Asistentes)
+         console.log("Recargue asistentes")
+       }
+           )
+       .catch(err=>{}
+       )
+
+       let Paises=`https://jc-innovation.com/ad/${apis[User].name}/ModelApi.php?Paises=${NumSesion}`
+    axios.get(Paises)
+        .then(api=>{
+         setPaises(api.data.Paises)
+       }
+           )
+       .catch(err=>{}
+       )
+  
+    
+  
   }
+//!---------------------------------------
 
+const Recarga=()=>{
+if(ComentariosDB){
+  let url= `https://jc-innovation.com/ad/${apis[User].name}/ModelApi.php?Recarga=${NumSesion}`
+  axios.get(url)
+  .then(api=>{
+  //  console.log("No hay cambios",api?.data?.Pais[0]?.total)
+   if(ComentariosDB.length!=api?.data?.Pais[0]?.total){
+    console.log(Refresh,api?.data?.Pais[0]?.total)
+   GetAllpreguntas()
+   console.log("Recargue todo bro")
+   }
+   console.log(Refresh)
+   console.log("AUN no recargo",ComentariosDB.length,api?.data?.Pais[0]?.total)
+   setRefresh(api?.data?.Pais[0]?.total)
+  })
+  
+}
 
+}
+
+  
   //! el usseefeect que se mantiene escuchando al numero de la sesion
   useEffect(() => {
+    GetAllpreguntas()
+    
   }, [NumSesion])
+
   useEffect(() => {
     GetAllpreguntas()
+    // Recarga()
   }, [ComentariosDB])
 
   const {handleSubmit,register}=useForm()  
 
   //!aqui creamos se guarda la informacion del form
   const  submit= data=>{
-      // console.log(data)
-    GetAllpreguntas()
-
       setNumSesion(data?.IDsesion)
-      // console.log(NumSesion)
+      // GetAllpreguntas()
   }
 
 
   let NameEstadisticas=()=>{
-   let hora=Asistentes[0]?Asistentes[0]?.visto_ultimavez.substring(0,10):""
+   let hora=Asistentes?Asistentes[0]?.visto_ultimavez.substring(0,10):""
     let na=`Estadisticas ${hora} ${apis[User].name} `
     return na
   }
 
 
-
-// console.log(Paises)
+  const contador=()=>{
+    // console.log("soy un bucle")
+    // GetAllpreguntas()
+  }
+  // setInterval(contador,10000);
+  
   return (
     <div className='Home'>
       <Menu color={apis[User].name}/>
@@ -104,14 +140,14 @@ const  GetAllpreguntas= ()=>{
 
   
 
-{/* <ReactHTMLTableToExcel
+<ReactHTMLTableToExcel
 id="ExportarExcel"
 className="btn"
 table="tblData"
 filename={NameEstadisticas()}
 sheet="Estadisticas"
 buttonText="Exportar excel"
-/> */}
+/>
 
    <div className='ContenP'>
  
@@ -145,7 +181,7 @@ buttonText="Exportar excel"
           ComentariosDB?.[0]?
         <>
         <br /><br />
-       <tr><th>Asistentes | Total: {Asistentes.length}</th></tr>
+       <tr><th>Asistentes | Total: {Asistentes?Asistentes.length:0}</th></tr>
           <tr className="PrincipalTR">
            
           <th className='ContenPregunta'>Nombre</th>

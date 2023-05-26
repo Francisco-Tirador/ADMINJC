@@ -58,13 +58,13 @@ sub()
   return (
     < >
     <tr className={!asd?`warning`:'check'}>
-    <th className='ContenPregunta'>{message}</th>
-      <th className='ContenPregunta'>{autor}</th>
-      <th className='ContenPregunta'>{fecha}</th>
-   <th>
+    <td className='ContenPregunta'>{message}</td>
+      <td className='ContenPregunta'>{autor}</td>
+      <td className='ContenPregunta'>{fecha}</td>
+   <td>
     
    <button onClick={removes} >ELIMINAR</button>
-   </th>
+   </td>
    
     </tr>
      
