@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import ServidoresHeader from '../Componts/ServidoresHeader'
 import Menu from '../Componts/Menu'
-import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+// import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import Asistente from '../Componts/Asistente'
 import Pais from '../Componts/Pais'
 const Home = () => {
@@ -111,11 +111,11 @@ if(ComentariosDB){
   }
 
 
-  let NameEstadisticas=()=>{
-   let hora=Asistentes?Asistentes[0]?.visto_ultimavez.substring(0,10):""
-    let na=`Estadisticas ${hora} ${apis[User].name} `
-    return na
-  }
+  // let NameEstadisticas=()=>{
+  //  let hora=Asistentes?Asistentes[0]?.visto_ultimavez.substring(0,10):""
+  //   let na=`Estadisticas ${hora} ${apis[User].name} `
+  //   return na
+  // }
 
 
   const contador=()=>{
@@ -140,14 +140,14 @@ if(ComentariosDB){
 
   
 
-<ReactHTMLTableToExcel
+{/* <ReactHTMLTableToExcel
 id="ExportarExcel"
 className="btn"
 table="tblData"
 filename={NameEstadisticas()}
 sheet="Estadisticas"
 buttonText="Exportar excel"
-/>
+/> */}
 
    <div className='ContenP'>
  
