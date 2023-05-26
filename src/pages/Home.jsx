@@ -4,8 +4,9 @@ import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import ServidoresHeader from '../Componts/ServidoresHeader'
 import Menu from '../Componts/Menu'
-
-
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import Asistente from '../Componts/Asistente'
+import Pais from '../Componts/Pais'
 const Home = () => {
 
 //! aqui se almacenan temporarlmente las rutas
@@ -24,6 +25,8 @@ const apis=[
 const [ComentariosDB,setComentariosDB]=useState("")//!Aqui se almacena la informacion
 const [NumSesion,setNumSesion]=useState("")//! aqui se almacena el numero de la sesión
 const [User,setUser]=useState(0)//! aqui se almacena el numero de la sesión
+const [Asistentes,setAsistentes]=useState("")
+const [Paises,setPaises]=useState("")
 
 
 //!aqui se manda a llamar la api
@@ -34,15 +37,31 @@ const  GetAllpreguntas= ()=>{
       setComentariosDB(api.data.Comentarios)
     }
         )
-    .catch(err=>{console.log(err)}
+    .catch(err=>{}
     )
- 
+
+    let asistentes=`https://jc-innovation.com/ad/${apis[User].name}/ModelApi.php?asistentes=`
+ axios.get(asistentes+NumSesion)
+     .then(api=>{
+      setAsistentes(api.data.Asistentes)
+    }
+        )
+    .catch(err=>{}
+    )
+    let Paises=`https://jc-innovation.com/ad/${apis[User].name}/ModelApi.php?Paises=${NumSesion}`
+ axios.get(Paises)
+     .then(api=>{
+      setPaises(api.data.Paises)
+      // console.log(api.data.Paises)
+    }
+        )
+    .catch(err=>{}
+    )
   }
 
 
   //! el usseefeect que se mantiene escuchando al numero de la sesion
   useEffect(() => {
-    GetAllpreguntas()
   }, [NumSesion])
   useEffect(() => {
     GetAllpreguntas()
@@ -52,19 +71,27 @@ const  GetAllpreguntas= ()=>{
 
   //!aqui creamos se guarda la informacion del form
   const  submit= data=>{
-      console.log(data)
+      // console.log(data)
+    GetAllpreguntas()
+
       setNumSesion(data?.IDsesion)
-      console.log(NumSesion)
+      // console.log(NumSesion)
   }
 
 
- 
+  let NameEstadisticas=()=>{
+   let hora=Asistentes[0]?Asistentes[0]?.visto_ultimavez.substring(0,10):""
+    let na=`Estadisticas ${hora} ${apis[User].name} `
+    return na
+  }
 
 
+
+// console.log(Paises)
   return (
     <div className='Home'>
       <Menu color={apis[User].name}/>
-      <ServidoresHeader apis={apis} setUser={setUser} User={User} modulo={NumSesion}/>
+      <ServidoresHeader apis={apis} setUser={setUser} User={User} modulo={NumSesion} Asistentes={Asistentes}/>
       
 
       <form onSubmit={handleSubmit(submit)}>
@@ -72,23 +99,30 @@ const  GetAllpreguntas= ()=>{
             <input  placeholder="Ingresa ID de la sesion" type="text" id='name' required  autoComplete='off'{...register("IDsesion")}/>
             <button >BUSCAR PREGUNTAS</button>
         </form>
-        <iframe src="https://piensaendigital.es/"></iframe>
-        <iframe src="https://music.youtube.com/watch?v=NorfZaIkyL8&list=RDAMVMDFhLjVAGNbA"></iframe>
-        <iframe src="https://vimeo.com/829649231" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-{/* <p><a href="https://vimeo.com/829649231">ciru pe 23 mayo</a> from <a href="https://vimeo.com/user200893153">Omar</a> on <a href="https://vimeo.com">Vimeo</a>.</p> */}
-      {/* <h3>PREGUNTAS DE {apis[User].name} MODULO   { NumSesion}</h3> */}
+        {/* <iframe src="https://player.vimeo.com/video/829649231?h=9d7de133e1&title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe> */}
+
+
+  
+
+<ReactHTMLTableToExcel
+id="ExportarExcel"
+className="btn"
+table="tblData"
+filename={NameEstadisticas()}
+sheet="Estadisticas"
+buttonText="Exportar excel"
+/>
+
    <div className='ContenP'>
+ 
+    <table id="tblData">
 
     {
           ComentariosDB?.[0]?<tr className="PrincipalTR">
-          <th className='ContenPregunta'>COMENTARIO</th>
-            <th className='ContenPregunta'>USUARIO</th>
-         
-          
-         
+          <th className='ContenPregunta'>Pregunta</th>
+            <th className='ContenPregunta'>Realizó</th>
+            <th className='ContenPregunta'>Hora</th>
           </tr>:""
-           
-          
     }
    {
           ComentariosDB?.[0]?
@@ -101,15 +135,68 @@ const  GetAllpreguntas= ()=>{
                 key={Comentario?.id}
                 refresh={GetAllpreguntas}
                 api={apis[User]?.remove}
-                color={apis[User]?.name}
+                fecha={Comentario.fecha_hora}
                 />
-              
-              
             )):ComentariosDB?.length==0?<div className='contenidoInicio'><h2>NO EXISTE ESTE ID O INTENTA DE NUEVO</h2></div>:
             <div className='contenidoInicio'><h2>INGRESA UNA ID DE SESION PARA VISUALIZAR LAS PREGUNTAS</h2></div>
 }
 
+{
+          ComentariosDB?.[0]?
+        <>
+        <br /><br />
+       <tr><th>Asistentes | Total: {Asistentes.length}</th></tr>
+          <tr className="PrincipalTR">
+           
+          <th className='ContenPregunta'>Nombre</th>
+            <th className='ContenPregunta'>Email</th>
+            <th className='ContenPregunta'>Institución</th>
+            <th className='ContenPregunta'>conexion</th>
+          </tr>
+          </>
+          :""
+    }
 
+{
+          Asistentes?.[0]?
+          Asistentes.map(Comentario=>(
+                 <Asistente
+                key={Comentario.id}
+                Usuario={Comentario.visto_ultimavez}
+                name={Comentario.nombre}
+                email={Comentario.email}
+                fecha={Comentario.fecha_hora_inicio}
+                institucion={Comentario.institucion}
+                />
+            )):null}
+
+{
+          ComentariosDB?.[0]?
+        <>
+        <br /><br />
+          <tr className="PrincipalTR">
+           
+          <th className='ContenPregunta'>Pais</th>
+            <th className='ContenPregunta'>Total</th>
+
+          </tr>
+          </>
+          :""
+    }
+{
+          Asistentes?.[0]?
+          Paises.map(Comentario=>(
+                 <Pais
+                key={Comentario.id}
+                Pais={Comentario.paises}
+                total={Comentario.total}
+                />
+            )):null}
+
+
+
+
+</table>
 
    </div>
     </div>
