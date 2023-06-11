@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
-import { useState } from 'react'
 
 
-const Pregunta = ({ID,message,autor,refresh,api,fecha}) => {
+const Pregunta = ({ID,message,autor,fecha,GetAllpreguntas,num}) => {
 
 const [Sonado,setSonado]=useState(false)
 
@@ -11,26 +10,25 @@ const [Sonado,setSonado]=useState(false)
   let array=["no se escucha","pesimo","pesima","mal","mala","bajito","no se entiende","problemas","no puedo entrar", "no abre","perdio","pierde","no puedo ver","no puedo entrar","fallando",
 "no puedo","no se ve","no hay sonido","no tengo audio","perdió la señal"
 ]
-  let asd=true
+  let ValidacionComentario=true
 
-const validacionContenido=(messsage)=>{
+const validacionContenido=()=>{
  for(let i=0;i<array.length;i++){
   let minusculas=message.toLowerCase()
   const validacion=minusculas.includes(array[i])
   if(validacion){
-    asd=false
+    ValidacionComentario=false
   }
  }
 }
 
 
 const removes=()=>{
-  console.log(api)
-  let url=`${api}${ID}`
+  let url=`https://jc-innovation.com/ad/ModelApi.php?removeById=${ID}`
   axios.get(url)
-  .then(api=>{
+  .then(api=>{ 
     console.log(api)
-    refresh()
+    GetAllpreguntas()
   }
       )
   .catch(err=>{console.log(err)}
@@ -42,28 +40,28 @@ const Alert=()=>{
   let sound=new Audio("./src/sounds/Alert.mp3")
   sound.play()
   setSonado(true)
-console.log("hola soy el sonido con la pregunta",ID)
 }
 
 const sub=()=>{
-if(!asd&&!Sonado){
+if(!ValidacionComentario&&!Sonado){
   Alert()
 }
 }
 validacionContenido()
 sub()
+// console.log(fecha)
 
-
-
+let i=1
   return (
     < >
-    <tr className={!asd?`warning`:'check'}>
+    <tr className={!ValidacionComentario?`warning`:'check'}>
+    <td className='ContenPregunta NUM'>{num}</td>
     <td className='ContenPregunta'>{message}</td>
       <td className='ContenPregunta'>{autor}</td>
       <td className='ContenPregunta'>{fecha}</td>
    <td>
     
-   <button onClick={removes} >ELIMINAR</button>
+   <button onClick={removes} className='btnEliminar'><img src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" />ELIMINAR</button>
    </td>
    
     </tr>

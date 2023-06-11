@@ -2,9 +2,10 @@ import React from 'react'
 import axios from 'axios'
 
 
-const Asistente = ({Usuario,name,fecha,email,institucion}) => {
+const Asistente = ({Usuario,name,fecha,email,institucion,table,num}) => {
 
   let array=false
+  // let table=table
 
 
 if(email?email.includes("@jc"):null){
@@ -13,7 +14,8 @@ if(email?email.includes("@jc"):null){
 
   return (
     < >
-    <tr  className={array?`warning`:'check'}>
+    <tr  className={`${array?`warning`:'check'} ${!table?"vewTabla":"noTabla"}`}>
+    <th className='ContenPregunta'>{num}</th>
     <th className='ContenPregunta'>{name}</th>
       <th className='ContenPregunta'>{email}</th>
       <th className='ContenPregunta'>{institucion}</th>
