@@ -65,8 +65,8 @@ const Tablas = ({ ComentariosDB,GetAllpreguntas }) => {
   let i=1
   let a=1
   let p=1
-
-const nameReporte=ComentariosDB?`ESTADÍSTICAS ${Asistentes?.[0].fecha.substring(0,10)} ${UserActivo} `:"REPORTE"
+console.log(Asistentes)
+const nameReporte=Asistentes?.[0]?`ESTADÍSTICAS ${Asistentes?.[0].fecha.substring(0,10)} ${UserActivo} `:"REPORTE"
 
   return (
     <>

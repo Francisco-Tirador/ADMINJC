@@ -37,7 +37,7 @@ const removes=()=>{
 
 
 const Alert=()=>{
-  let sound=new Audio("./src/sounds/Alert.mp3")
+  let sound=new Audio("https://jc-innovation.com/ad/assets/sounds/Alert.mp3")
   sound.play()
   setSonado(true)
 }

@@ -16,7 +16,7 @@ ul{
 }
 .ContenP{
   background-color: var(--color-one);
-  max-width: 70%;
+  max-width: 80%;
   margin: 0 auto;
   padding: 10px;
   border-radius: 20px;
