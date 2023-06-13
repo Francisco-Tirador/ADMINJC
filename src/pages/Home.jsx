@@ -7,17 +7,19 @@ import Pantalla from '../components/Estadisticas/Pantalla'
 import { useSelector } from 'react-redux/es/exports'
 import { useDispatch } from 'react-redux/es/hooks/useDispatch'
 import { resetModulo } from '../store/Slice/ModuloSlice'
+import  { resetSesiones } from '../store/Slice/SesionesSlice'
 
 const Home = () => {
   //! Axios
   const UserActivo = useSelector(u => u?.UserActivo)
   const ModuloSlice = useSelector(u => u?.ModuloSlice)
+  const Sesiones=useSelector(s=>s.SesionesSlice)
   const dispach = useDispatch()
+  // console.log(Sesiones)
 
 
 
   const [ComentariosDB, setComentariosDB] = useState(null)//!Aqui se almacena la informacion
-  const [Sesion, setSesion] = useState(null)//! aqui se almacena el numero de la sesión
 
 
   //!aqui se manda a llamar la api
@@ -36,7 +38,7 @@ const Home = () => {
     let url = `https://jc-innovation.com/ad/ModelApi.php?sesion`
     axios.get(url)
       .then(api => {
-        setSesion(api.data.Sesion)
+        dispach(resetSesiones(api?.data?.Sesion))
       }
       )
       .catch(err => { }
@@ -66,12 +68,12 @@ const Home = () => {
       <select className='SelectPrincipal' onChange={valueUsuario} required>
         <option value="" >Escoge un Usuario para mostrar las sesiones</option>
         {
-          Sesion ? Sesion.map(Option => (
+          Sesiones?.[0] ? Sesiones.map(Option => (
             <option key={Option.id} value={Option.id}>{`${Option.conferencia} ID :${Option.id}`}</option>
           )) : null
         }
       </select>
-      <Pantalla Sesion={Sesion} />
+      <Pantalla  />
 
 
       <div className='ContenP'>

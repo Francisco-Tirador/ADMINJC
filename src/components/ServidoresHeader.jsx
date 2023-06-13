@@ -56,7 +56,6 @@ const Modulo=useSelector(u=>u.ModuloSlice)
       
          }
       }
-
       useEffect(() => {
         GetUsuarios()
 
@@ -66,7 +65,7 @@ const Modulo=useSelector(u=>u.ModuloSlice)
   return (
     <div className={`ContenHomeHeader ${UserActivo} `}>
         {
-          Modulo?<h2>{UserActivo} {Modulo==-1?"":"Modulo ID: "+ Modulo }</h2> : 
+          Modulo?<h2>{UserActivo}</h2> : 
           <h2>Aun no seleccionas ninguna sesión</h2>
         } 
       

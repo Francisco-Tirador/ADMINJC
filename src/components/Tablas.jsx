@@ -3,13 +3,16 @@ import Pregunta from './Pregunta'
 import Asistente from './Asistente'
 import Pais from './Pais'
 import axios from 'axios'
-import * as XLSX from 'xlsx';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import BotonReporte from './Estadisticas/BotonReporte'
+import { resetAsistentes } from '../store/Slice/AsistentesSlice'
 
 const Tablas = ({ ComentariosDB,GetAllpreguntas }) => {
   const ModuloSlice = useSelector(m => m.ModuloSlice)
   const UserActivo = useSelector(m => m.UserActivo)
+  const AsistentesSlice=useSelector(a=>a.AsistentesSlice)
+  const dispach=useDispatch()
+  // console.log(AsistentesSlice)
 
   const [Paises, setPaises] = useState(false)
   const [Asistentes, setAsistentes] = useState(null)
@@ -23,6 +26,7 @@ const Tablas = ({ ComentariosDB,GetAllpreguntas }) => {
     axios.get(asistentes + ModuloSlice)
       .then(api => {
         setAsistentes(api.data.Asistentes)
+        dispach(resetAsistentes(api?.data?.Asistentes))
       }
       )
       .catch(err => { }
@@ -65,7 +69,7 @@ const Tablas = ({ ComentariosDB,GetAllpreguntas }) => {
   let i=1
   let a=1
   let p=1
-console.log(Asistentes)
+// console.log(Asistentes)
 const nameReporte=Asistentes?.[0]?`ESTADÍSTICAS ${Asistentes?.[0].fecha.substring(0,10)} ${UserActivo} `:"REPORTE"
 
   return (
@@ -73,7 +77,13 @@ const nameReporte=Asistentes?.[0]?`ESTADÍSTICAS ${Asistentes?.[0].fecha.substri
       {
         ComentariosDB ?
           <>
+         <div className='ContenBtnTablas'>
+        <span>
+         <button className='btnFlotante btn' onClick={ocultarTabla}>{table ? "OCULTAR ASISTENTES " : "VER ASISTENTES"}</button>
+                    <button className='btnFlotante btn' onClick={asis}>Actualizar </button>
+        </span>
             <div className='Lefth'><BotonReporte tableData="tblData" fileName={nameReporte}/></div>
+         </div>
             <table id="tblData">
               {
                 ComentariosDB?.[0] ? 
@@ -103,9 +113,7 @@ const nameReporte=Asistentes?.[0]?`ESTADÍSTICAS ${Asistentes?.[0].fecha.substri
                 ComentariosDB?.[0] ?
                   <>
                     
-                    <tr><th>Asistentes | Total: {Asistentes ? Asistentes.length : 0}</th></tr>
-                    <button className='btnFlotante' onClick={ocultarTabla}>{table ? "OCULTAR ASISTENTES " : "VER ASISTENTES"}</button>
-                    <button className='btnFlotante btnFbotton' onClick={asis}>Actualizar </button>
+                    <tr id=''><th>Asistentes | Total: {Asistentes ? Asistentes.length : 0}</th></tr>
                     <tr className="PrincipalTR">
 
                       <th className='ContenPregunta'> # </th>

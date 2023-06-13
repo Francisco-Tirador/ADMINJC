@@ -91,8 +91,8 @@ button:focus-visible {
   justify-content: space-around;
   color: #ffffff;
   border-radius: 0 0 20px 20px;
-  width:90%;
-  padding-left: 10%;
+  width:100%;
+  /* padding-left: 10%; */
   z-index: 400;
 }
 .center{
@@ -107,11 +107,11 @@ button:focus-visible {
   background-color: rgb(33 33 71);
 }
 .SOCMEXCIRPED{
-  background-color: rgb(255, 175, 28);
+  background-color: #ff7900;
   /* color: purple; */
 }
 .AMMR{
-  background-color: rgb(223, 208, 1);
+  background-color: #d7ae0e;
 }
 .AMMTAC{
   background-color: rgb(186, 2, 2);

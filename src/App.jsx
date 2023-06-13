@@ -1,16 +1,27 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import Pregunta from './components/Pregunta'
 import Home from './pages/Home'
+
+import { Routes,Route,Link,NavLink,useNavigate } from 'react-router-dom'
+import Sesiones from './pages/Sesiones'
+import NewSesion from './pages/NewSesion'
+
 
 function App() {
   const [count, setCount] = useState(0)
-
+  const naviguete=useNavigate()
+  // naviguete('/')
   return (
     <>
-   <Home/>
+   {/* <Home/> */}
+
+<Routes>
+  <Route path='/' element={<Home/>}/>
+  <Route path='/sesiones' element={<Sesiones/>}/>
+  <Route path='/+1Sesion' element={<NewSesion/>}/>
+</Routes>
+
+
     </>
   )
 }
