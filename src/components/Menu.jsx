@@ -10,6 +10,7 @@ const Menu = () => {
         <ul>
       
             {/* <li className='active'></li> */}
+            <li>Calendario </li>
             <li><NavLink className={({isActive})=>isActive?'active':''} to="/sesiones">Sesiones </NavLink></li>
             <li><NavLink className={({isActive})=>isActive?'active':''} to="/">Preguntas </NavLink></li>
             <li>Sesiones </li>

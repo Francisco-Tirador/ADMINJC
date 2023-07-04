@@ -12,7 +12,7 @@ const Tablas = ({ ComentariosDB,GetAllpreguntas }) => {
   const UserActivo = useSelector(m => m.UserActivo)
   const AsistentesSlice=useSelector(a=>a.AsistentesSlice)
   const dispach=useDispatch()
-  // console.log(ComentariosDB)
+  // console.log(AsistentesSlice)
 
   const [Paises, setPaises] = useState(false)
   const [Asistentes, setAsistentes] = useState(null)
@@ -24,6 +24,7 @@ const Tablas = ({ ComentariosDB,GetAllpreguntas }) => {
     let asistentes = `https://jc-innovation.com/ad/ModelApi.php?asistentes=`
     axios.get(asistentes + ModuloSlice)
       .then(api => {
+        // console.log(api)
         setAsistentes(api.data.Asistentes)
         dispach(resetAsistentes(api?.data?.Asistentes))
       }
@@ -68,13 +69,13 @@ const Tablas = ({ ComentariosDB,GetAllpreguntas }) => {
   let i=1
   let a=1
   let p=1
-// console.log(Asistentes)
+// console.log(Paises)
 const nameReporte=Asistentes?.[0]?`ESTADÍSTICAS ${Asistentes?.[0].fecha?.substring(0,10)} ${UserActivo} `:"REPORTE"
 
   return (
     <>
       {
-        ComentariosDB ?
+        ModuloSlice?.[0] ?
           <>
          <div className='ContenBtnTablas'>
         <span>
@@ -108,23 +109,26 @@ const nameReporte=Asistentes?.[0]?`ESTADÍSTICAS ${Asistentes?.[0].fecha?.substr
                   )) : ""
               }
 
-              {
-                ComentariosDB?.[0] ?
+            
+                {
+                  Asistentes?.[0]?
                   <>
                     
-                    <tr id=''><th>Asistentes | Total: {Asistentes ? Asistentes.length : 0}</th></tr>
-                    <tr className="PrincipalTR">
+                  <tr id=''><th>Asistentes | Total: {Asistentes ? Asistentes.length : 0}</th></tr>
+                  <tr className="PrincipalTR">
 
-                      <th className='ContenPregunta'> # </th>
-                      <th className='ContenPregunta'>Nombre</th>
-                      <th className='ContenPregunta'>Email</th>
-                      <th className='ContenPregunta'>Institución</th>
-                      <th className='ContenPregunta'>Conexion</th>
-                    </tr>
+                    <th className='ContenPregunta'> # </th>
+                    <th className='ContenPregunta'>Nombre</th>
+                    <th className='ContenPregunta'>Email</th>
+                    <th className='ContenPregunta'>Institución</th>
+                    <th className='ContenPregunta'>Conexion</th>
+                  </tr>
 
-                  </>
-                  : ""
-              }
+                </>
+                :null
+                }
+                
+              
 
               {
                 Asistentes?.[0] ?
@@ -141,7 +145,7 @@ const nameReporte=Asistentes?.[0]?`ESTADÍSTICAS ${Asistentes?.[0].fecha?.substr
                   )) : null}
 
               {
-                ComentariosDB?.[0] ?
+                Asistentes?.[0] ?
                   <>
 
                     <tr className="PrincipalTR">
@@ -161,7 +165,8 @@ const nameReporte=Asistentes?.[0]?`ESTADÍSTICAS ${Asistentes?.[0].fecha?.substr
                       Pais={Comentario.pais}
                       total={Comentario.total}
                     />
-                  )) : null}
+                  )) : null
+              }
 
 
 

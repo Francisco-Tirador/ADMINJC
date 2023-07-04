@@ -7,7 +7,7 @@ const ModuloSlice=useSelector(m=>m.ModuloSlice)
 const Asistentes=useSelector(a=>a.AsistentesSlice)
 const Sesiones=useSelector(a=>a.SesionesSlice)
 const UserActivo=useSelector(u=>u.UserActivo)
-console.log(ModuloSlice)
+// console.log(Asistentes)
   const index=(id)=>{
     const asd=Sesiones.findIndex(e=>e.id==id)
     return asd
@@ -15,7 +15,7 @@ console.log(ModuloSlice)
  
 
  let AsistentesJC=[]
-Asistentes?.[0]?Asistentes?.map(aJC=>{if(aJC.email.includes("@jc")){AsistentesJC.push(aJC.email)}}):null
+Asistentes?.[0]?Asistentes?.map(aJC=>{if(aJC.email?.includes("@jc")){AsistentesJC.push(aJC.email)}}):null
 
  // console.log(AsistentesJC)
   return (

@@ -2,7 +2,9 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux/es/exports'
 import { useDispatch } from 'react-redux/es/hooks/useDispatch'
+import { resetModulo } from '../store/Slice/ModuloSlice'
 import { reset } from '../store/Slice/UserActivo'
+import { resetCargando } from '../store/Slice/CargandoSlice'
 
 
 
@@ -10,6 +12,8 @@ const ServidoresHeader = () => {
 const dispach=useDispatch()
 const UserActivo=useSelector(u=>u.UserActivo)
 const Modulo=useSelector(u=>u.ModuloSlice)
+const cargando=useSelector(c=>c.CargandoSlice)
+
 // console.log(Modulo)
 
 
@@ -40,34 +44,33 @@ const Modulo=useSelector(u=>u.ModuloSlice)
     }
     const valueUsuario=(valu)=>{
         let valor=valu.target.value
-      
+
         if(valor!=="Sin_Usuario"){
           DesactivarUsuarios()
           ActivarUsuario(valor)
           const Index=Users.findIndex(e=>e.id==valor)
           ActivarUsuario(valor)
            let resultF=Users[Index]?.cliente.toUpperCase()
+           dispach(resetCargando("true"))
            const retardo = setTimeout(() => {
              dispach(reset(resultF))
              
            }, 2000);
-       
-           retardo();
+           dispach(resetModulo(""))
+           return () => clearTimeout(retardo); 
       
          }
       }
       useEffect(() => {
         GetUsuarios()
-
        }, [])
 
 
   return (
     <div className={`ContenHomeHeader ${UserActivo} `}>
-        {
-          Modulo?<h2>{UserActivo}</h2> : 
-          <h2>Aun no seleccionas ninguna sesión</h2>
-        } 
+        
+          <h2>{UserActivo}</h2> 
+        
       
       <select className='SelectPrincipal Select2' onChange={valueUsuario}>
         <option value="Sin_Usuario">Servidor</option>

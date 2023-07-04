@@ -15,7 +15,7 @@ const Home = () => {
   const ModuloSlice = useSelector(u => u?.ModuloSlice)
   const Sesiones=useSelector(s=>s.SesionesSlice)
   const dispach = useDispatch()
-  // console.log(Sesiones)
+  // console.log(ModuloSlice)
 
 
 
@@ -79,7 +79,7 @@ const Home = () => {
       <div className='ContenP'>
         <Tablas ComentariosDB={ComentariosDB} GetAllpreguntas={GetAllpreguntas} />
         {
-          !ComentariosDB?.[0] ?
+          !ModuloSlice?.[0] ?
            <div className='PrincipalTR'>
             <h2> Selecciona una sesión para poder visualizar las preguntas</h2>
           </div> : ""

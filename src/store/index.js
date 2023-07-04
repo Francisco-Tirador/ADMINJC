@@ -4,6 +4,7 @@ import ModuloSlice from "./Slice/ModuloSlice";
 import ComentarioDBSlice from "./Slice/ComentarioDBSlice";
 import AsistentesSlice from "./Slice/AsistentesSlice";
 import SesionesSlice from "./Slice/SesionesSlice";
+import CargandoSlice from "./Slice/CargandoSlice";
 
 export default configureStore(
     {
@@ -12,7 +13,8 @@ export default configureStore(
             ModuloSlice,
             ComentarioDBSlice,
             AsistentesSlice,
-            SesionesSlice
+            SesionesSlice,
+            CargandoSlice
              },
             
            
