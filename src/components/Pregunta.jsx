@@ -6,7 +6,6 @@ const Pregunta = ({ID,message,autor,fecha,GetAllpreguntas,num}) => {
 
 const [Sonado,setSonado]=useState(false)
 
-
   let array=["no se escucha","pesimo","pesima","mal","mala","bajito","no se entiende","problemas","no puedo entrar", "no abre","perdio","pierde","no puedo ver","no puedo entrar","fallando",
 "no puedo","no se ve","no hay sonido","no tengo audio","perdió la señal"
 ]
@@ -14,14 +13,13 @@ const [Sonado,setSonado]=useState(false)
 
 const validacionContenido=()=>{
  for(let i=0;i<array.length;i++){
-  let minusculas=message.toLowerCase()
-  const validacion=minusculas.includes(array[i])
+  let minusculas=message?.toLowerCase()
+  const validacion=minusculas?.includes(array[i])
   if(validacion){
     ValidacionComentario=false
   }
  }
 }
-
 
 const removes=()=>{
   let url=`https://jc-innovation.com/ad/ModelApi.php?removeById=${ID}`
@@ -34,7 +32,6 @@ const removes=()=>{
   .catch(err=>{console.log(err)}
   )
 }
-
 
 const Alert=()=>{
   let sound=new Audio("https://jc-innovation.com/ad/assets/sounds/Alert.mp3")

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const AsistentesSlice=createSlice(
     {
         name:"AsistentesSlice",
-        initialState:"",
+        initialState:[],
         reducers:{
             resetAsistentes:(set,accion)=>accion.payload
         }

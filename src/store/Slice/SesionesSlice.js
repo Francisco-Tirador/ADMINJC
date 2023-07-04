@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const SesionesSlice=createSlice(
     {
         name:"SesionesSlice",
-        initialState:"",
+        initialState:[],
         reducers:{
             resetSesiones:(set,accion)=>accion.payload
         }

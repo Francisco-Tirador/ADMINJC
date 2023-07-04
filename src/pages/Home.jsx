@@ -65,10 +65,10 @@ const Home = () => {
     <div className='Home'>
       <ServidoresHeader />
       <Menu/>
-      <select className='SelectPrincipal' onChange={valueUsuario} required>
-        <option value="" >Escoge un Usuario para mostrar las sesiones</option>
+      <select className='SelectPrincipal' onChange={valueUsuario}  required>
+        <option value="" >Escoge una Sesion</option>
         {
-          Sesiones?.[0] ? Sesiones.map(Option => (
+          Sesiones!="a" ? Sesiones.map(Option => (
             <option key={Option.id} value={Option.id}>{`${Option.conferencia} ID :${Option.id}`}</option>
           )) : null
         }

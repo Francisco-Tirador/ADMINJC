@@ -14,7 +14,10 @@ const BotonReporte = ({ tableData, fileName }) => {
   };
 
   return (
-    <button onClick={handleExport}className='btnReporte' ><img src="https://cdn-icons-png.flaticon.com/512/732/732220.png" alt="" />   Generar Reporte</button>
+    <button onClick={handleExport}className='btnReporte'title='GENERAR UN REPORTE DE EXCEL DE ESTA SESION' >
+      <img src="https://cdn-icons-png.flaticon.com/512/732/732220.png" alt="" /> 
+        Generar Estadísticas
+        </button>
   );
 };
 

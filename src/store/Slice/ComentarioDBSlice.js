@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const ComentariosBDSlice=createSlice(
     {
         name:"ComentariosBDSlice",
-        initialState:"",
+        initialState:[],
         reducers:{
             ComentariosBDSlice:(set,accion)=>accion.payload
         }

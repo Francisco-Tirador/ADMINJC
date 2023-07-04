@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 
 
-const Asistente = ({Usuario,name,fecha,email,institucion,table,num}) => {
+const Asistente = ({name,fecha,email,institucion,table,num}) => {
 
   let array=false
   // let table=table

@@ -12,12 +12,11 @@ const Tablas = ({ ComentariosDB,GetAllpreguntas }) => {
   const UserActivo = useSelector(m => m.UserActivo)
   const AsistentesSlice=useSelector(a=>a.AsistentesSlice)
   const dispach=useDispatch()
-  // console.log(AsistentesSlice)
+  // console.log(ComentariosDB)
 
   const [Paises, setPaises] = useState(false)
   const [Asistentes, setAsistentes] = useState(null)
   const [table, settable] = useState(false)
-
 
 
 
@@ -70,7 +69,7 @@ const Tablas = ({ ComentariosDB,GetAllpreguntas }) => {
   let a=1
   let p=1
 // console.log(Asistentes)
-const nameReporte=Asistentes?.[0]?`ESTADÍSTICAS ${Asistentes?.[0].fecha.substring(0,10)} ${UserActivo} `:"REPORTE"
+const nameReporte=Asistentes?.[0]?`ESTADÍSTICAS ${Asistentes?.[0].fecha?.substring(0,10)} ${UserActivo} `:"REPORTE"
 
   return (
     <>
@@ -133,7 +132,6 @@ const nameReporte=Asistentes?.[0]?`ESTADÍSTICAS ${Asistentes?.[0].fecha.substri
                     <Asistente
                     num={a++}
                       key={Comentario.id}
-                      Usuario={Comentario.visto_ultimavez}
                       name={Comentario.nombre}
                       email={Comentario.email}
                       fecha={Comentario.fecha}

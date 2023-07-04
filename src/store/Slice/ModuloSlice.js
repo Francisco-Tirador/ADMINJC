@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const Modulo=createSlice(
     {
         name:"ModuloSlice",
-        initialState:"",
+        initialState:[],
         reducers:{
         resetModulo:(set,accion)=>accion.payload
         }

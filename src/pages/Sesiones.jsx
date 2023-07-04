@@ -9,7 +9,7 @@ const Sesiones = () => {
     const Sesiones = useSelector(s => s.SesionesSlice)
     const UserActivo = useSelector(s => s.UserActivo)
     const navigate=useNavigate()
-    // console.log(Sesiones)
+    console.log(Sesiones)
     const masUnaSesion=()=>{
             navigate("/+1Sesion")
             console.log("me fui")
@@ -37,7 +37,7 @@ const Sesiones = () => {
                         <th className='ContenPregunta'>Fecha de Fin</th>
                     </tr>
                     {
-                        Sesiones?.[0]?Sesiones.map(S=>(
+                        Sesiones!="a"?Sesiones?.map(S=>(
                             <tr>
                                 <th className='ContenPregunta'>{S.id}</th>
                                 <th className='ContenPregunta trLargo'>{S.conferencia}</th>

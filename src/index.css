@@ -108,25 +108,32 @@ button:focus-visible {
 }
 .SOCMEXCIRPED{
   background-color: #ff7900;
-  /* color: purple; */
+  color: purple;
 }
 .AMMR{
   background-color: #d7ae0e;
 }
 .AMMTAC{
-  background-color: rgb(186, 2, 2);
+  background-color: #d10000;
 }
 .COMEXANE{
-  background-color: #373fcd;
+  background-color: rgb(160 29 36);
 }
 .AMEH{
-  background-color: #373fcd;
-  /* color: rgb(212, 34, 34); */
+  background-color: #233981;
 }
 .AMCE{
-  background-color: #71bc01;
+  background-color: #28a597;
 }
-
+.AMTIP{
+  background-color: #684c88;
+}
+.MEXCTRIMS{
+  background-color: #003849;
+}
+.AMID{
+  background-color: #009cdf;
+}
 .NUM{
   max-width:10px !important;
   /* background-color: #213547; */
