@@ -10,7 +10,7 @@
 }
 
 .charging_screen{
-  background-color: rgb(33, 33, 71);
+  background-color:rgb(20 23 47);
   position: fixed;
   top: 0;
   right: 0;
@@ -47,20 +47,18 @@ ul{
   max-width: 80%;
   margin: 0 auto;
   padding: 10px;
-  /* border-radius: 20px; */
-  /* overflow-x: scroll; */
 }
 
 .ContenPregunta{
-  /* width: 70%; */
-  border: 1px solid rgb(22, 147, 181);
+  border-bottom: 1px solid rgb(22, 147, 181);
   text-align: start;
-  text-align: justify;
+  /* text-align: justify; */
   padding: 5px 10px;
   
 }
 .PrincipalTR{
   background-color: var(--color-second);
+  color: #ffffff;
 }
 .trLargo{
   width: 70%;
@@ -117,40 +115,31 @@ cursor: pointer;
 }
 .textPrincipal{
   width: 100%;
-  /* background-color: #f3f3f3; */
   display: block;
   font-weight: 100;
   font-size: xx-large;
   border-bottom: 2px solid var(--color-tercer);
-  /* background-color: #0b5bd2; */
 }
 
 .ContenForm{
   padding: 80px 0px;
-  box-shadow: 20px 20px 0px var(--color-tercer);
+  box-shadow: 20px 20px 0px var(--color-tercer)!important;
   flex-wrap: wrap;
   display: flex;
   justify-content: space-around;
   align-items: center;
   border: solid 1px var(--color-tercer);
-  /* width: 50%; */
   max-width: 50%;
-  /* background-color: #064c04; */
   margin: 0 auto;
   margin-bottom: 50px;
 }
-.CenterFlex{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 
 form{
   max-width: 100%;
   margin: 0 auto;
 }
 .liInput{
-  /* background-color: #064c04; */
   margin:20px 0px;
   width: 100%;
 display: flex;
@@ -196,7 +185,7 @@ input{
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #6e707e;
+  color: #515152;
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid var(--color-tercer);
@@ -389,7 +378,6 @@ input:focus{
   justify-content: space-between;
 }
 .Option{
-  
   font-weight: 600;
   font-size: larger;
 
@@ -398,5 +386,63 @@ input:focus{
   box-sizing: border-box;
 background-color: var(--color-tercer);
 color: #ffffff;
-/* border: 1px solid#ffffff; */
 }
+
+
+
+.ContenForm {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.ContenForm label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.ContenForm input[type="text"],
+.ContenForm textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+
+
+.ContenForm button:hover {
+  background-color: #094191;
+}
+
+.ContenForm .error-message {
+  color: #ff4d4d;
+  margin-top: 5px;
+}
+
+
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+.ContenForm input[type="text"]:focus,
+.ContenForm textarea:focus {
+  animation: slideUp 0.3s ease-in-out forwards;
+}
+
+
+
+
+
+

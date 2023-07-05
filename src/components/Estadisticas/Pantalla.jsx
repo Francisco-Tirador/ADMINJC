@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-
+import axios from 'axios'
 
 const Pantalla = () => {
 const ModuloSlice=useSelector(m=>m.ModuloSlice)
@@ -12,12 +12,37 @@ const UserActivo=useSelector(u=>u.UserActivo)
     const asd=Sesiones.findIndex(e=>e.id==id)
     return asd
   }
- 
 
+
+  const checkVimeoVideo = async (videoId) => {
+    const apiUrl = `https://api.vimeo.com/videos/${videoId}`;
+    const accessToken = 'tu_token_de_acceso_a_la_api_de_vimeo';
+  
+    try {
+      const response = await axios.get(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+  
+      if (response.status === 200) {
+        console.log('El video existe y está disponible');
+      } else {
+        console.log('El video no existe o no está disponible');
+      }
+    } catch (error) {
+      console.error('Error al verificar el video:', error);
+    }
+  };
+  
+  // checkVimeoVideo('777433444'); 
  let AsistentesJC=[]
 Asistentes?.[0]?Asistentes?.map(aJC=>{if(aJC.email?.includes("@jc")){AsistentesJC.push(aJC.email)}}):null
 
- // console.log(AsistentesJC)
+
+
+
+
   return (
     <div className='center contenVisual' >
       {

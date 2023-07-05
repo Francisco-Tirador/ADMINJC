@@ -12,15 +12,7 @@ const NewSesion = () => {
     const { handleSubmit, reset, register } = useForm()
     const submit = (data) => {
         console.log(data)
-        const URL = "https://api-gato-red.onrender.com/api-gato-red/v1/users/register"
-        axios.post(URL, data)
-            .then(res => {
-                console.log(res.data)
-                // navigate('/Inicio')
-            })
-            .catch(err => {
-                console.log(err.response.data.message)
-            })
+       
     }
     const regreso=()=>{
         navigate("/sesiones")

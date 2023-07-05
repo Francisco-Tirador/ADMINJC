@@ -47,8 +47,16 @@ const Home = () => {
   //! el usseefeect que se mantiene escuchando al numero de la sesion
 
   useEffect(() => {
-    GetAllpreguntas()
-  }, [ModuloSlice])
+    GetAllpreguntas();
+  
+    const interval = setInterval(() => {
+      GetAllpreguntas();
+      console.log("Se llamaron las preguntas de la sesión " +ModuloSlice)
+    }, 1500);
+  
+    return () => clearInterval(interval);
+  }, [ModuloSlice]);
+
 
   useEffect(() => {
     GetSesion()
